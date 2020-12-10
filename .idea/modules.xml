@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/grocery.iml" filepath="$PROJECT_DIR$/.idea/grocery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/grocery_laravel.iml" filepath="$PROJECT_DIR$/.idea/grocery_laravel.iml" />
     </modules>
   </component>
 </project>
