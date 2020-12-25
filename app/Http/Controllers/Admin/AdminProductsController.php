@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Code;
+use App\Models\DiscountCode;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +20,8 @@ class AdminProductsController extends Controller
 {
     //
     public function index(){
-        $products = Product::all();
+        //$products = Product::all();
+        $products = Product::simplePaginate(3);
 
 
         return view("livewire.admin.admin-dashboard-component",['products'=>$products])->layout('layouts.admin');
@@ -102,7 +107,7 @@ class AdminProductsController extends Controller
         $products = Product::all();
 
 
-        return view("livewire.admin.admin-dashboard-component",['products'=>$products])->layout('layouts.admin');
+        return redirect()->route("admin.dashboard");
 
 
     }
@@ -137,6 +142,7 @@ class AdminProductsController extends Controller
 
         $userName = $request->input('user_name');
         $email = $request->input('email');
+
 
         $password = $request->input('password');
 
@@ -199,6 +205,83 @@ class AdminProductsController extends Controller
         return redirect()->route("admin.dashboard.userList");
 
     }
+
+    //Add Code
+    public function addCodeForm(Request $request){
+
+
+        $code = $request->input('code');
+        $percentage_str= $request->input('percentage');
+        $percentage = floatval($percentage_str);
+
+
+
+        $arrToInsert = array("code"=>$code,"code_percentage"=>$percentage);
+
+        DB::table('codes')->insert($arrToInsert);
+
+
+        return redirect()->route("admin.dashboard.codeList");
+
+
+    }
+
+    //Display code
+    public function codeList(){
+        $codes = Code::all();
+
+
+        return view("livewire.admin.admin-code-dash",['codes'=>$codes])->layout('layouts.admin');
+    }
+
+    //Display orderitem
+    public function orderItemList(){
+        $orderItems = OrderItem::all();
+
+
+        return view("livewire.admin.admin-orderitem-dash",['orderItems'=>$orderItems])->layout('layouts.admin');
+    }
+
+    //Display order
+    public function orderList(){
+        $orders = Order::all();
+        $results = Order::with('codes')->get();
+        $orderDetails = OrderItem::with('orders')->get();
+
+
+        return view("livewire.admin.admin-orderitem-dash",['orderItems'=>$results])->layout('layouts.admin');
+    }
+
+    //Display order details
+    public function orderDetails($id){
+//        $order = Order::find($id);
+
+        $data['order']=Order::find($id);
+        $data['orderDetails']=OrderItem::with('orders')->get()->where('order_id',$id);
+
+
+
+
+//        //$results = Order::with('codes')->get();*/
+//        $orderDetails = OrderItem::with('orders')->get()->where('order_id',$id);
+
+
+        return view("livewire.admin.admin-orderitemdetails-dash",['data'=>$data])->layout('layouts.admin');
+    }
+
+    //delete User
+    public function deleteOrder($id){
+        $order = Order::find($id);
+
+
+
+        Order::destroy($id);
+
+        return redirect()->route("admin.dashboard.orderitemList");
+
+    }
+
+
 
 
 }

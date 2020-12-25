@@ -24,13 +24,43 @@ use App\Http\Livewire\Admin;
 
 Route::get('/', ["uses"=>"App\Http\Controllers\ProductsController@index",'as'=>'allProducts']);
 
+Route::get('/product', ["uses"=>"App\Http\Controllers\ProductsController@index",'as'=>'allProducts']);
+
+//Fruit
+Route::get('/fruit', ["uses"=>"App\Http\Controllers\ProductsController@fruitProducts",'as'=>'fruitProducts']);
+
+//Vegetables
+Route::get('/vegetables', ["uses"=>"App\Http\Controllers\ProductsController@vegetablesProducts",'as'=>'vegetablesProducts']);
+
+//Search
+Route::get('search', ["uses"=>"App\Http\Controllers\ProductsController@search",'as'=>'searchProducts']);
+
+
 Route::get('product/addToCart/{id}',['uses'=>"App\Http\Controllers\ProductsController@addProductToCart",'as'=>'AddToCartProduct']);
 
 //show cart item
 Route::get('cart', ["uses"=>"App\Http\Controllers\ProductsController@showCart",'as'=>'cartproducts']);
 
-//delete item fromcart
+//delete item from cart
 Route::get('product/deleteFromCart/{id}',['uses'=>"App\Http\Controllers\ProductsController@deleteItemFromCart",'as'=>'DeleteItemFromCart']);
+
+//checkout Page
+Route::get('checkoutProducts',['uses'=>"App\Http\Controllers\ProductsController@checkoutProducts",'as'=>'checkoutProducts']);
+
+//process checkout Page
+Route::post('product/createNewOrder/',['uses'=>"App\Http\Controllers\ProductsController@createNewOrder",'as'=>'createNewOrder']);
+
+//checkout Page
+Route::post('product/createOrder',['uses'=>"App\Http\Controllers\ProductsController@createOrder",'as'=>'createOrder']);
+
+
+//increase single product
+Route::get('product/incSingleProduct/{id}',['uses'=>"App\Http\Controllers\ProductsController@incSingleProduct",'as'=>'incSingleProduct']);
+//decrease single product
+
+Route::get('product/decSingleProduct/{id}',['uses'=>"App\Http\Controllers\ProductsController@decSingleProduct",'as'=>'decSingleProduct']);
+
+
 
 //For User
 Route::middleware('auth:sanctum', 'verified')->group(function (){
@@ -93,8 +123,23 @@ Route::middleware('auth:sanctum', 'verified','authadmin')->group(function (){
     Route::post('/admin/updateUser/{id}',
         ["uses"=>"App\Http\Controllers\Admin\AdminProductsController@updateUser"])->name('adminUpdateUser');
 
+    //Admin Code Dash
+    Route::get('/admin/codesDashboard',["uses"=>"App\Http\Controllers\Admin\AdminProductsController@codeList"])->name('admin.dashboard.codeList');
 
+    //Admin order item Dash
+    Route::get('/admin/orderitemDashboard',["uses"=>"App\Http\Controllers\Admin\AdminProductsController@orderList"])->name('admin.dashboard.orderitemList');
 
+    //Add code post
+    Route::post('/admin/addCodeForm',
+        ["uses"=>"App\Http\Controllers\Admin\AdminProductsController@addCodeForm"])->name('adminAddCode');
+
+    //Admin Panel: details order get form
+    Route::get('/admin/orderDetails/{id}',
+        ["uses"=>"App\Http\Controllers\Admin\AdminProductsController@orderDetails"])->name('adminOrderDetails');
+
+    //delete User
+    Route::get('/admin/orderListDelete/{id}',
+        ["uses"=>"App\Http\Controllers\Admin\AdminProductsController@deleteOrder"])->name('adminDeleteOrder');
 
 });
 

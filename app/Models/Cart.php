@@ -4,6 +4,8 @@
 namespace App\Models;
 
 
+use http\Env\Request;
+
 class Cart
 {
     public $items; // ['id'=>['quantity' =>, 'price' => , 'data'=.]
@@ -48,6 +50,8 @@ class Cart
         $this->totalPrice = $this->totalPrice + $price;
 
     }
+
+
 
     public function updatePriceAndQuantity(){
 

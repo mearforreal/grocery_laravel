@@ -56,6 +56,12 @@
                         </tbody>
                     </table>
 
+                <div class="mb-5">
+                    {{$products->links()}}
+
+                </div>
+
+
                 <form action="/admin/addProductForm" method="post" enctype="multipart/form-data">
                 @csrf
                     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

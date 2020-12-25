@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Login | E-Shopper</title>
+    <title>Grocery Online</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -68,7 +68,7 @@
                                     @if(Auth::user()->utype === "ADM")
                                         <li><a href=""><i class="fa fa-user"></i>My account({{Auth::user()->name}})</a></li>
                                         <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-star"></i> {{Auth::user()->utype}} Dashboard</a></li>
-                                        <li><a href="checkout.html"><i class="fa fa-crosshairs"></i>Checkout</a></li>
+
                                         {{--                                        <li><a href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-out></i> Logout</a></li>--}}
                                         <li>
                                             <a href="{{route('logout')}}"

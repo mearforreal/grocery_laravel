@@ -5,7 +5,7 @@
 
 
 
-    <h2>Products</h2>
+    <h2>Users</h2>
     <div class="col-sm-6">
 
         <a href="{{route('adminAddUserDisplay')}}" class="btn btn-info">Add user</a>
@@ -59,5 +59,7 @@
 
 
     </div>
+
+
 
 @endsection
