@@ -41,6 +41,6 @@ jobs:
             extensions: mbstring, ctype, fileinfo, openssl, PDO, bcmath, json, tokenizer, xml
 
       - name: Composer install
-          run: |
+        run: |
           composer install --no-dev --no-interaction --prefer-dist
 
