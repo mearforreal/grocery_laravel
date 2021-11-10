@@ -45,4 +45,4 @@ jobs:
           composer install --no-dev --no-interaction --prefer-dist
 
       - name: Create deployment artifact
-        run: tar -czf app.tar.gz * --exclude=*.git --exclude=node_modules --exclude=tests *
+        run: tar -czf app.tar.gz
