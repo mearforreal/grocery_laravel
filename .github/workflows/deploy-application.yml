@@ -36,7 +36,7 @@ jobs:
 
       - name: Configure PHP 7.4
         uses: shivammathur/setup-php@master
-          with:
+        with:
             php-version: 7.4
             extensions: mbstring, ctype, fileinfo, openssl, PDO, bcmath, json, tokenizer, xml
 
